@@ -1,5 +1,16 @@
 {% extends "base.html" %} {% block title %}Here Come Dat Boi{% endblock %} {% block content%}
-<input type="submit" name="submit_button" value="Do Something">
+<form action="/Poll1">
+  <input type="submit" value="Poll 1" />
+</form>
+<form action="/Poll2">
+  <input type="submit" value="Poll 2" />
+</form>
+<form action="/Poll3">
+  <input type="submit" value="Poll 3" />
+</form>
+<form action="/Poll4">
+  <input type="submit" value="Poll 4" />
+</form>
 <style>
   table, th, td {
     border:1px solid black;
@@ -24,27 +35,45 @@
         .tg .tg-9ydz{border-color:#333333;font-weight:bold;text-align:center;vertical-align:top}
         .tg .tg-i81m{background-color:#ffffff;text-align:center;vertical-align:top}
         </style>
-        <table class="tg" style="undefined;table-layout: fixed; width: 574px">
+        <table class="tg" style="undefined; table-layout: fixed; width: 574px">
         <colgroup>
         <col style="width: 273px">
         <col style="width: 301px">
         </colgroup>
+        {% if isActive %}
         <thead>
           <tr>
-            <th class="tg-9ydz" colspan="2">Umfrage: {{pollQuestion}} </th>
+            <th class="tg-9ydz" colspan="2" style=" background-color:rgb(186, 255, 129);">Umfrage: {{pollQuestion}} - Active: {{isActive}}</th>
+  
           </tr>
         </thead>
+        {% else %}
+        <thead>
+          <tr>
+            <th class="tg-9ydz" colspan="2" style=" background-color:rgb(255, 129, 129);">Umfrage: {{pollQuestion}} - Active: {{isActive}}</th>
+  
+          </tr>
+        </thead>
+        {% endif %}
         <tbody>
           <tr>
             <td class="tg-baqh" colspan="2"><span style="font-style:italic">{{pollDescription}}</span></td>
           </tr>
           <tr>
             <td class="tg-baqh">{{pollOptions[0]}}</td>
-            <td class="tg-baqh">{{pollOptions[1]}}</td>
+            <td class="tg-baqh">%</td>
           </tr>
           <tr>
-            <td class="tg-i81m">{{pollOptions[2]}}</td>
+            <td class="tg-i81m">{{pollOptions[1]}}</td>
+            <td class="tg-baqh">%</td>
+          </tr>
+          <tr>
+            <td class="tg-baqh">{{pollOptions[2]}}</td>
+            <td class="tg-baqh">%</td>
+          </tr>
+          <tr>
             <td class="tg-i81m">{{pollOptions[3]}}</td>
+            <td class="tg-baqh">%</td>
           </tr>
         </tbody>
         </table>

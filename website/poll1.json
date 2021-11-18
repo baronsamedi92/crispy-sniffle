@@ -2,7 +2,7 @@
     "question": "Is Fynn Kliemann ein pic?",
     "question_desc": "Wähle mit bedacht!!!",
     "question_desc_size": "155%",
-    "poll_active": false,
+    "poll_active": true,
     "caspar_options": {
         "option1": "Ja",
         "option2": "nein",

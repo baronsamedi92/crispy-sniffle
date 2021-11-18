@@ -1,13 +1,13 @@
 {
-    "question": "Is Fynn Kliemann ein pic?",
-    "question_desc": "Wähle mit bedacht!!!",
+    "question": "Test",
+    "question_desc": "???",
     "question_desc_size": "155%",
     "poll_active": false,
     "caspar_options": {
-        "option1": "Ja",
-        "option2": "nein",
-        "option3": "klar",
-        "option4": "arschnase"
+        "option1": "ttttt",
+        "option2": "zzzzzz",
+        "option3": "uuuuuuu",
+        "option4": "iiiiiii"
     },
     "vote_options": {
         "options": {
