@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block title %}Here Come Dat Boi{% endblock %} {% block content%}
+<input type="submit" name="submit_button" value="Do Something">
+<style>
+  table, th, td {
+    border:1px solid black;
+  }
+</style>
+    <h1 align="center">Umfragen</h1>
+    <form method="POST">
+      <div align="center"> 
+        <div id="container">
+          </div>
+          <script src="script.js"></script>
+        </div>
+      </div>
+      <div align="center"> 
+      <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          overflow:hidden;padding:10px 20px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          font-weight:normal;overflow:hidden;padding:10px 20px;word-break:normal;}
+        .tg .tg-baqh{text-align:center;vertical-align:top}
+        .tg .tg-9ydz{border-color:#333333;font-weight:bold;text-align:center;vertical-align:top}
+        .tg .tg-i81m{background-color:#ffffff;text-align:center;vertical-align:top}
+        </style>
+        <table class="tg" style="undefined;table-layout: fixed; width: 574px">
+        <colgroup>
+        <col style="width: 273px">
+        <col style="width: 301px">
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="tg-9ydz" colspan="2">Umfrage: {{pollQuestion}} </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-baqh" colspan="2"><span style="font-style:italic">{{pollDescription}}</span></td>
+          </tr>
+          <tr>
+            <td class="tg-baqh">{{pollOptions[0]}}</td>
+            <td class="tg-baqh">{{pollOptions[1]}}</td>
+          </tr>
+          <tr>
+            <td class="tg-i81m">{{pollOptions[2]}}</td>
+            <td class="tg-i81m">{{pollOptions[3]}}</td>
+          </tr>
+        </tbody>
+        </table>
+    </form>
+    <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Dat_Boi_%28resized_50%25%29.jpg" alt="MDN">
+    
+    {% endblock %}
+    

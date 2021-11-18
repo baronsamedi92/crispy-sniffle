@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+%}
+<form method="POST">
+  <h3 align="center">Login</h3>
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Enter password"
+    />
+  </div>
+  <picture>
+    <source srcset="https://en.wikipedia.org/wiki/Dat_Boi#/media/File:Dat_Boi_(resized_50%).jpg" media="(min-width: 600px)">
+    <img src="https://en.wikipedia.org/wiki/Dat_Boi#/media/File:Dat_Boi_(resized_50%).jpg" alt="MDN">
+   </picture>
+  <br />
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}
