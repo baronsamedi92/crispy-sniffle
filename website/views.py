@@ -44,7 +44,7 @@ def home():
 @views.route('/Poll1', methods=['GET', 'POST'])
 def poll1():
    #holy shit thats redundant af -> fix this mess
-    data = getPoll("website\poll1.json")
+    data = getPoll("website/poll1.json")
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -63,7 +63,7 @@ def poll1():
 @views.route('/Poll2', methods=['GET', 'POST'])
 def poll2():
    #holy shit thats redundant af -> fix this mess
-    data = getPoll("website\poll2.json")
+    data = getPoll("website/poll2.json")
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -83,7 +83,7 @@ def poll2():
 @views.route('/Poll3', methods=['GET', 'POST'])
 def poll3():
    #holy shit thats redundant af -> fix this mess
-    data = getPoll("website\poll3.json")
+    data = getPoll("website/poll3.json")
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -103,7 +103,7 @@ def poll3():
 @views.route('/Poll4', methods=['GET', 'POST'])
 def poll4():
    #holy shit thats redundant af -> fix this mess
-    data = getPoll("website\data.json")
+    data = getPoll("website/poll4.json")
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -156,5 +156,12 @@ def getDatBoy():
 
 @views.route('/createPoll', methods=['GET', 'POST'])
 def createPoll():
+    
    
     return render_template("createPoll.html")
+
+@views.route('/form', methods=['GET', 'POST'])
+def form():
+    
+   
+    return render_template("form.html")
