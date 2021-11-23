@@ -15,33 +15,41 @@
    <div class="container" style="border:1px solid black">
     <div class="Big-Ass-Template">
     <form class="row g-3" action="/form" method="POST">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
+        <label for="inputQuestion" class="form-label">Umfragen Name</label>
+        <input type="text" class="form-control" name="inputPollName" question="inputQuestion" placeholder="z.B. DjungelUmfrage">
+      </div>
+      <div class="col-md-3">
+      </div>
       <div class="col-12">
         <label for="inputQuestion" class="form-label">Frage</label>
-        <input type="text" class="form-control" id="inputQuestion" question="inputQuestion" placeholder="z.B. was finden die Abenteurer in der Höhle?">
+        <input type="text" class="form-control" name="inputQuestion" question="inputQuestion" placeholder="z.B. was finden die Abenteurer in der Höhle?">
       </div>
       <div class="col-12">
         <label for="inputQuestionDesc" class="form-label">Fragenbeschreibung</label>
-        <input type="text" class="form-control" id="inputQuestionDesc" questionDesc="inputQuestionDesc" placeholder="z.B. wähle mit Bedacht!">
+        <input type="text" class="form-control" name="inputQuestionDesc" questionDesc="inputQuestionDesc" placeholder="z.B. wähle mit Bedacht!">
       </div>
       <div class="col-md-6">
         <label for="inputOption1" class="form-label">Antwort1</label>
-        <input type="text" class="form-control" id="inputOption1" inputOption1="inputOption1" placeholder="Antwort möglichkeit 1">
+        <input type="text" class="form-control" name="inputOption1" inputOption1="inputOption1" placeholder="Antwort möglichkeit 1">
       </div>
       <div class="col-md-6">
         <label for="inputOption2" class="form-label">Antwort2</label>
-        <input type="text" class="form-control" id="inputOption2" inputOption12="inputOption2" placeholder="Antwort möglichkeit 2">
+        <input type="text" class="form-control" name="inputOption2" inputOption12="inputOption2" placeholder="Antwort möglichkeit 2">
       </div>
       <div class="col-md-6">
         <label for="inputOption3" class="form-label">Antwort3</label>
-        <input type="text" class="form-control" id="inputOption3" inputOption3="inputOption3" placeholder="Antwort möglichkeit 3">
+        <input type="text" class="form-control" name="inputOption3" inputOption3="inputOption3" placeholder="Antwort möglichkeit 3">
       </div>
       <div class="col-md-6">
         <label for="inputOption4" class="form-label">Antwort4</label>
-        <input type="text" class="form-control" id="inputOption4" inputOption4="inputOption4" placeholder="Antwort möglichkeit 4">
+        <input type="text" class="form-control" name="inputOption4" inputOption4="inputOption4" placeholder="Antwort möglichkeit 4">
       </div>
       <div class="col-12">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
+          <input class="form-check-input" type="checkbox" name="gridCheck">
           <label class="form-check-label" for="gridCheck">
             Soll die Umfrage aktiv geschaltet werden? (Y/N)
           </label>

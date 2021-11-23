@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %}Form created!{% endblock %} {% block content%}
-    <h1 align="center">Die Poll wurde nun erstellt!!</h1>
+    <h1 align="center">Die Umfrage: {{pollName}} wurde nun erstellt!!</h1>
     <form method="POST">
       <div align="center"> 
         <div id="container">
@@ -12,4 +12,6 @@
     <img src="https://howtobeahero.de/images/4/45/How_to_mainpage_2.png" alt="MDN">
     
     {% endblock %}
+
+    
     
