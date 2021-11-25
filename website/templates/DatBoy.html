@@ -1,98 +1,168 @@
 {% extends "base.html" %} {% block title %}Here Come Dat Boi{% endblock %} {% block content%}
 <nav class="navbar navbar-expand-lg" style="background-color: #589c4caf;">
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbar">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
   </button>
   <div class="collapse navbar-collapse" id="navbar">
     <div class="navbar-nav">
       {%for i in range(0, count)%}
       <form action="/{{polls[i]}}">
-        <input type="submit" value="{{polls[i]}}"/>
+        <input type="submit" value="{{polls[i]}}" />
       </form>
       {%endfor%}
     </div>
   </div>
 </nav>
 <style>
-  table, th, td {
-    border:1px solid black;
+  table,
+  th,
+  td {
+    border: 1px solid black;
   }
 </style>
-    <h1 align="center">Umfrage: {{ pollName }}</h1>
-    <form method="POST">
-      <div align="center"> 
-        <div id="container">
-          </div>
-          <script src="script.js"></script>
-        </div>
-      </div>
-      <div align="center"> 
-      <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;}
-        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-          overflow:hidden;padding:10px 20px;word-break:normal;}
-        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-          font-weight:normal;overflow:hidden;padding:10px 20px;word-break:normal;}
-        .tg .tg-baqh{text-align:center;vertical-align:top}
-        .tg .tg-9ydz{border-color:#333333;font-weight:bold;text-align:center;vertical-align:top}
-        .tg .tg-i81m{background-color:#ffffff;text-align:center;vertical-align:top}
-        </style>
+<h1 align="center">Umfrage: {{ pollName }}</h1>
+<form method="POST">
+    <div id="container">
+    </div>
+    <script src="script.js"></script>
+  </div>
+  </div>
+    <style type="text/css">
+      .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      .tg td {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 20px;
+        word-break: normal;
+      }
+
+      .tg th {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 20px;
+        word-break: normal;
+      }
+
+      .tg .tg-baqh {
+        text-align: center;
+        vertical-align: top
+      }
+
+      .tg .tg-9ydz {
+        border-color: #333333;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: top
+      }
+
+      .tg .tg-i81m {
+        background-color: #ffffff;
+        text-align: center;
+        vertical-align: top
+      }
+    </style>
+    <div class="parent">
         <table class="tg" style="undefined; table-layout: fixed; width: 574px">
-        <colgroup>
-        <col style="width: 273px">
-        <col style="width: 301px">
-        </colgroup>
-        {% if isActive %}
-        <thead>
-          <tr>
-            <th class="tg-9ydz" colspan="2" style=" background-color:rgb(186, 255, 129);">Umfrage: {{pollQuestion}} - Active: {{isActive}}</th>
-  
-          </tr>
-        </thead>
-        {% else %}
-        <thead>
-          <tr>
-            <th class="tg-9ydz" colspan="2" style=" background-color:rgb(255, 129, 129);">Umfrage: {{pollQuestion}} - Active: {{isActive}}</th>
-  
-          </tr>
-        </thead>
-        {% endif %}
-        <tbody>
-          <tr>
-            <td class="tg-baqh" colspan="2"><span style="font-style:italic">{{pollDescription}}</span></td>
-          </tr>
-          <tr>
-            <td class="tg-baqh">{{pollOptions[0]}}</td>
-            <td class="tg-baqh">%</td>
-          </tr>
-          <tr>
-            <td class="tg-i81m">{{pollOptions[1]}}</td>
-            <td class="tg-baqh">%</td>
-          </tr>
-          <tr>
-            <td class="tg-baqh">{{pollOptions[2]}}</td>
-            <td class="tg-baqh">%</td>
-          </tr>
-          <tr>
-            <td class="tg-i81m">{{pollOptions[3]}}</td>
-            <td class="tg-baqh">%</td>
-          </tr>
-        </tbody>
+          <colgroup>
+            <col style="width: 273px">
+            <col style="width: 301px">
+          </colgroup>
+          {% if isActive %}
+          <thead>
+            <tr>
+              <th class="tg-9ydz" colspan="2" style=" background-color:rgb(186, 255, 129);">Umfrage: {{pollQuestion}} -
+                Active: {{isActive}}</th>
+    
+            </tr>
+          </thead>
+          {% else %}
+          <thead>
+            <tr>
+              <th class="tg-9ydz" colspan="2" style=" background-color:rgb(255, 129, 129);">Umfrage: {{pollQuestion}} -
+                Active: {{isActive}}</th>
+    
+            </tr>
+          </thead>
+          {% endif %}
+          <tbody>
+            <tr>
+              <td class="tg-baqh" colspan="2"><span style="font-style:italic">{{pollDescription}}</span></td>
+            </tr>
+            <tr>
+              <td class="tg-baqh">{{pollOptions[0]}}</td>
+              <td class="tg-baqh">%</td>
+            </tr>
+            <tr>
+              <td class="tg-i81m">{{pollOptions[1]}}</td>
+              <td class="tg-baqh">%</td>
+            </tr>
+            <tr>
+              <td class="tg-baqh">{{pollOptions[2]}}</td>
+              <td class="tg-baqh">%</td>
+            </tr>
+            <tr>
+              <td class="tg-i81m">{{pollOptions[3]}}</td>
+              <td class="tg-baqh">%</td>
+            </tr>
+          </tbody>
         </table>
-        <div class="col-6">
-          <button type="submit" class="btn btn-outline-success" name="activatePoll">Knall Aktiv den Bums!</button>
-        </div>
-        <div class="col-6">
-          <button type="submit" class="btn btn-outline-secondary" name="deactivatePoll">Mach aus jetz.</button>
-        </div>
+      </div>
+    </div>
+</form>
+
+{% if request.path == "/DatBoy" %}
+<p>THIS IS A TEMPLATE</p>
+{% else %}
+<div align="center">
+<div class="container">
+  <form method="POST" action="/{{url}}?activate">
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-outline-success" style="font-size:24px" name="active" value="active">Knall
+          Aktiv den Bums!</button>
+      </div>
+  </form>
+  <form method="POST" action="/{{url}}?offline">
+    <div class="col">
+    <button type="submit" class="btn btn-outline-secondary" style="font-size:24px" name="deactivate">Mach aus
+      jetz.</button>
+    </div>
+  </form>
+  <p>
+    <div class="col">
+    <button class="btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#collapseExample"
+      aria-expanded="false" aria-controls="collapseExample" style="font-size:24px">
+      Ab in de Müll
+    </button>
+    <div class="col">
+  </p>
+  <div class="collapse" id="collapseExample">
+    <form method="POST" action="/{{url}}?delete">
+      <div class="card card-body">
+        Bist du sicher?
+        <button type="submit" class="btn btn-outline-danger" style="font-size:24px" name="deactivate">JA MACH WEG
+          JETZ.</button>
+      </div>
     </form>
-    <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Dat_Boi_%28resized_50%25%29.jpg" alt="MDN">
-    <form method="POST">
-      <a class="btn btn-danger fas fa-trash" href="/blingbling" role="button">Delete</a>n>
-    </form>
-    
-    {% endblock %}
-    
+  </div>
+</div>
+{% endif %}
+<img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Dat_Boi_%28resized_50%25%29.jpg" alt="MDN">
+<form method="POST">
+  <a class="btn btn-danger" href="/poll-deleted" role="button">Delete</a>
+</form>
+<div align="center">
+
+{% endblock %}

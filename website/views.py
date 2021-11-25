@@ -46,13 +46,9 @@ def home():
 
     return render_template("home.html")
 
-@views.route('/blingbling', methods=['GET', 'POST'])
-def drone():
-
-    flash('BING BONG')
-
-
-    return render_template("home.html")
+@views.route('/poll-deleted', methods=['GET', 'POST'])
+def pollDeleted():
+    return render_template("poll-deleted.html")
 
 @views.route('/DatBoy', methods=['GET', 'POST'])
 def datBoy():
@@ -93,8 +89,14 @@ def datBoy():
 
 @views.route('/<str>', methods=['GET', 'POST'])  # /PollXYZ
 def pollPages(str):
-    sortDirectory()
+    kebab = flask.request.url
+    blah = "activate"
+    if 'activate' in kebab:
+     flash(kebab)
+
+#sort the directory and set up the poll
     data = getPoll("website/jsonFiles/"+str)
+    sortDirectory()
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -109,23 +111,44 @@ def pollPages(str):
     answerContainer.append(answer3)
     answerContainer.append(answer4)
     pollName = str[:len(str)-5]
-    if flask.request.method == 'POST': #&  #request.form.get('activatePoll'):
+   
+
+    #data['poll_active'] = True
+    #with open("website/casparJsonFIle/poll.json", "w+") as f:
+     #json.dump(data, f, indent=4)
+   
+    #data['poll_active'] = False
+    #with open("website/casparJsonFIle/poll.json", "w+") as f:
+     #json.dump(data, f)
+    #os.remove("website/jsonFiles/"+str)
+
+     #Check Buttons if none was clicked just go on with the data loading
+    if 'activate' in flask.request.url:
         flash('DING IS AKTIV')
         data['poll_active'] = True
         with open("website/casparJsonFIle/poll.json", "w+") as f:
          json.dump(data, f, indent=4)
-    elif flask.request.method == 'POST': #&  request.form.get('deactivatePoll'):
-         flash('DING IS AUS')
-         data['poll_active'] = False
-         with open("website/casparJsonFIle/poll.json", "w+") as f:
-          json.dump(data, f)
-    elif flask.request.method == 'POST': #&  request.form.get('death'):
-         flash('DING IS AUS')
-         data['ALL YOUR BASE ARE BELONGTO US'] = False
-         os.remove("website/jsonFiles/"+str)
+    elif 'offline' in flask.request.url:
+        pass 
+        data['poll_active'] = False
+        with open("website/casparJsonFIle/poll.json", "w+") as f:
+         json.dump(data, f, indent=4)
+    elif 'delete' in flask.request.url:
+        pass # do something else
+        os.remove("website/jsonFiles/"+str)
+    else:
+        pass # unknown
+    
 
     return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive,
-    count=count, polls=fileNameArray, pollName=pollName)
+    count=count, polls=fileNameArray, pollName=pollName, url=str)
+
+@views.route('/activate', methods=['GET', 'POST'])
+def activate():
+    return "OH SHIT OH SHIT OH SHIT"
+
+    
+
 
 
 

@@ -1,13 +1,13 @@
 {
-    "question": "Is Fynn Kliemann ein pic?",
-    "question_desc": "W\u00e4hle mit ################!!!",
+    "question": "Wer hat gefurzt?",
+    "question_desc": "bah das stinkt",
     "question_desc_size": "155%",
     "poll_active": true,
     "caspar_options": {
-        "option1": "Ja",
-        "option2": "nein",
-        "option3": "klar",
-        "option4": "arschnase"
+        "option1": "Hauke",
+        "option2": "Sven",
+        "option3": "Deniz",
+        "option4": "Matt"
     },
     "vote_options": {
         "options": {

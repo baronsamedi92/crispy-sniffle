@@ -1,9 +1,31 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
+<style>
+  .parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 1 / 5 / 2; background-color: hotpink;}
+.div2 { grid-area: 1 / 2 / 5 / 3; background-color: orange;}
+</style>
 <h1 align="center">Some Stuff and Thangs</h1>
-<form method="POST">
-  <div align="center"> 
-    <a class="btn btn-primary" style="font-size:24px" href="/blingbling" role="button"><i class="fa fa-trash-o"></i>Link</a>
+<div class="parent">
+  <div class="div1">
+    <div>xxxx</div>
+    <div>xxxx</div>
+    <div>xxxx</div>
+    <div>xxxx</div>
+    <div>xxxx</div>
+    <div>xxxx</div>
+    <div>xxxx</div>
+    <div>xxxx</div>
   </div>
-</form>
+  <div>WAS IST DAS HIER</div>
+</div>
+  <div class="div2">x</div>
+  </div>
 {% endblock %}
