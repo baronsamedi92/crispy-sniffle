@@ -1,12 +1,14 @@
 from operator import indexOf
 import re
 from flask import Blueprint, render_template, request, flash, jsonify
+import flask
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
 import json
 from datetime import date
 import tkinter as tk
+import os
 
 
 
@@ -18,33 +20,59 @@ def getPoll(JsonFile):
      data = json.loads(f.read())
     return data
 
+directory_in_str = "website/jsonFiles/"
+def sortDirectory():
+    directory = sorted(os.listdir(unsortedDirectory))
+    return directory
+unsortedDirectory = os.fsencode(directory_in_str)
+directory = sorted(os.listdir(unsortedDirectory))
+fileNameArray = []
+
+for count, file in enumerate(directory):
+     filename = os.fsdecode(file)
+     fileNameArray.append(filename)
+print(count)
+
+
+    
+
+#allPolls = getPoll('website/allPolls.json')
+
 
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
+
+
+    return render_template("home.html")
+
+@views.route('/blingbling', methods=['GET', 'POST'])
+def drone():
+
+    flash('BING BONG')
+
+
+    return render_template("home.html")
+
+@views.route('/DatBoy', methods=['GET', 'POST'])
+def datBoy():
+    directory_in_str = "website/jsonFiles/"
+    directory = os.fsencode(directory_in_str)
+    fileNameArray = []
+
+    for count, file in enumerate(os.listdir(directory)):
+     filename = os.fsdecode(file)
+     fileNameArray.append(filename)
+     print(count)
     
-    if request.method == 'POST':
-        note = request.form.get('note')
-        question = request.form.get('question');
-        print('HIER STEHT AUCH WAS HALLO', question);
+    print(count)
 
-        if len(note) < 1:
-            flash('Note is too short!', category='error')
-        else:
-            new_note = Note(data=note, user_id=current_user.id)
-            db.session.add(new_note)
-            db.session.commit()
-            flash('Note added!', category='success')
-            print('##1###',note)
+    allPolls = getPoll("website/jsonFiles/allPolls.json")
+    pollsIteratedAndBrokenUpForStupidPython = []
+    for i in (range( 1, len(allPolls)+1)):
+     pollsIteratedAndBrokenUpForStupidPython.append(allPolls['poll'+str(i)])
 
-        
-
-    return render_template("home.html", user=current_user)
-
-@views.route('/Poll1', methods=['GET', 'POST'])
-def poll1():
-   #holy shit thats redundant af -> fix this mess
-    data = getPoll("website/poll1.json")
+    data = getPoll("website/jsonFiles/poll_template.json")
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -58,12 +86,15 @@ def poll1():
     answerContainer.append(answer2)
     answerContainer.append(answer3)
     answerContainer.append(answer4)
-    return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive)
 
-@views.route('/Poll2', methods=['GET', 'POST'])
-def poll2():
-   #holy shit thats redundant af -> fix this mess
-    data = getPoll("website/poll2.json")
+    return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, 
+    pollOptions=answerContainer, isActive=isActive, count=count, polls=fileNameArray)
+
+
+@views.route('/<str>', methods=['GET', 'POST'])  # /PollXYZ
+def pollPages(str):
+    sortDirectory()
+    data = getPoll("website/jsonFiles/"+str)
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -77,66 +108,32 @@ def poll2():
     answerContainer.append(answer2)
     answerContainer.append(answer3)
     answerContainer.append(answer4)
-    return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive)
+    pollName = str[:len(str)-5]
+    if flask.request.method == 'POST': #&  #request.form.get('activatePoll'):
+        flash('DING IS AKTIV')
+        data['poll_active'] = True
+        with open("website/casparJsonFIle/poll.json", "w+") as f:
+         json.dump(data, f, indent=4)
+    elif flask.request.method == 'POST': #&  request.form.get('deactivatePoll'):
+         flash('DING IS AUS')
+         data['poll_active'] = False
+         with open("website/casparJsonFIle/poll.json", "w+") as f:
+          json.dump(data, f)
+    elif flask.request.method == 'POST': #&  request.form.get('death'):
+         flash('DING IS AUS')
+         data['ALL YOUR BASE ARE BELONGTO US'] = False
+         os.remove("website/jsonFiles/"+str)
 
-
-@views.route('/Poll3', methods=['GET', 'POST'])
-def poll3():
-   #holy shit thats redundant af -> fix this mess
-    data = getPoll("website/poll3.json")
-    isActive = data['poll_active']
-    question = data['question']
-    casparOptions = data['caspar_options']
-    casparDesctiption = data['question_desc']
-    answer1 = casparOptions['option1']
-    answer2 = casparOptions['option2']
-    answer3 = casparOptions['option3']
-    answer4 = casparOptions['option4']
-    answerContainer = []
-    answerContainer.append(answer1)
-    answerContainer.append(answer2)
-    answerContainer.append(answer3)
-    answerContainer.append(answer4)
-    return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive)
-
-
-@views.route('/Poll4', methods=['GET', 'POST'])
-def poll4():
-   #holy shit thats redundant af -> fix this mess
-    data = getPoll("website/poll4.json")
-    isActive = data['poll_active']
-    question = data['question']
-    casparOptions = data['caspar_options']
-    casparDesctiption = data['question_desc']
-    answer1 = casparOptions['option1']
-    answer2 = casparOptions['option2']
-    answer3 = casparOptions['option3']
-    answer4 = casparOptions['option4']
-    answerContainer = []
-    answerContainer.append(answer1)
-    answerContainer.append(answer2)
-    answerContainer.append(answer3)
-    answerContainer.append(answer4)
-    return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive)
+    return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive,
+    count=count, polls=fileNameArray, pollName=pollName)
 
 
 
-@views.route('/delete-note', methods=['POST'])
-def delete_note():
-    note = json.loads(request.data)
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
-
-    return jsonify({})
 
 @views.route('/DatBoy', methods=['GET', 'POST'])
 def getDatBoy():
 
-    with open("website/poll1.json", "r") as f:
+    with open("website/jsonFiles/poll1.json", "r") as f:
      data = json.loads(f.read())
     question = data['question']
     casparOptions = data['caspar_options']
@@ -162,6 +159,31 @@ def createPoll():
 
 @views.route('/form', methods=['GET', 'POST'])
 def form():
-    
-   
-    return render_template("form.html")
+
+    with open("website/jsonFiles/poll_template.json", "r+") as f:
+     newPoll = json.loads(f.read())
+#get input from poll
+    inputPollName = request.form.get('inputPollName')
+    inputQuestion = request.form.get('inputQuestion')
+    inputQuestionDesc = request.form.get('inputQuestionDesc')
+    inputOption1 = request.form.get('inputOption1')
+    inputOption2 = request.form.get('inputOption2')
+    inputOption3 = request.form.get('inputOption3')
+    inputOption4 = request.form.get('inputOption4')
+    inputCheckbox = request.form.get('gridCheck')
+
+#pare input into new poll
+    newPoll['poll_active'] = inputCheckbox
+    newPoll['question'] = inputQuestion
+    casparOptions = newPoll['caspar_options']
+    newPoll['question_desc'] = inputQuestionDesc
+    casparOptions['option1'] = inputOption1
+    casparOptions['option2'] = inputOption2
+    casparOptions['option3'] = inputOption3
+    casparOptions['option4'] = inputOption4
+
+    with open("website/jsonFiles/"+str(inputPollName)+".json", "w+") as f:
+         json.dump(newPoll, f)
+
+
+    return render_template("form.html", pollName= inputPollName)

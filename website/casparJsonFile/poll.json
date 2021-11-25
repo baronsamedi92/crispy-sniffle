@@ -1,0 +1,20 @@
+{
+    "question": "Is Fynn Kliemann ein pic?",
+    "question_desc": "W\u00e4hle mit ################!!!",
+    "question_desc_size": "155%",
+    "poll_active": true,
+    "caspar_options": {
+        "option1": "Ja",
+        "option2": "nein",
+        "option3": "klar",
+        "option4": "arschnase"
+    },
+    "vote_options": {
+        "options": {
+            "opt_1": 15,
+            "opt_2": 23,
+            "opt_3": 11,
+            "opt_4": 21
+        }
+    }
+}

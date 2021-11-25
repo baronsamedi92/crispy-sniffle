@@ -1,25 +1,27 @@
 {% extends "base.html" %} {% block title %}Here Come Dat Boi{% endblock %} {% block content%}
-<form action="/Poll1">
-  <input type="submit" value="Poll 1" />
-</form>
-<form action="/Poll2">
-  <input type="submit" value="Poll 2" />
-</form>
-<form action="/Poll3">
-  <input type="submit" value="Poll 3" />
-</form>
-<form action="/Poll4">
-  <input type="submit" value="Poll 4" />
-</form>
-<form action="/Poll5">
-  <input type="submit" value="Poll 5" />
-</form>
+<nav class="navbar navbar-expand-lg" style="background-color: #589c4caf;">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbar">
+  </button>
+  <div class="collapse navbar-collapse" id="navbar">
+    <div class="navbar-nav">
+      {%for i in range(0, count)%}
+      <form action="/{{polls[i]}}">
+        <input type="submit" value="{{polls[i]}}"/>
+      </form>
+      {%endfor%}
+    </div>
+  </div>
+</nav>
 <style>
   table, th, td {
     border:1px solid black;
   }
 </style>
-    <h1 align="center">Umfragen</h1>
+    <h1 align="center">Umfrage: {{ pollName }}</h1>
     <form method="POST">
       <div align="center"> 
         <div id="container">
@@ -80,8 +82,17 @@
           </tr>
         </tbody>
         </table>
+        <div class="col-6">
+          <button type="submit" class="btn btn-outline-success" name="activatePoll">Knall Aktiv den Bums!</button>
+        </div>
+        <div class="col-6">
+          <button type="submit" class="btn btn-outline-secondary" name="deactivatePoll">Mach aus jetz.</button>
+        </div>
     </form>
     <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Dat_Boi_%28resized_50%25%29.jpg" alt="MDN">
+    <form method="POST">
+      <a class="btn btn-danger fas fa-trash" href="/blingbling" role="button">Delete</a>n>
+    </form>
     
     {% endblock %}
     
