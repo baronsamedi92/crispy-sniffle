@@ -1,20 +1,20 @@
 {
-    "question": "Template",
-    "question_desc": "Template Template Template!!!",
+    "question": "-",
+    "question_desc": "-",
     "question_desc_size": "155%",
     "poll_active": false,
     "caspar_options": {
-        "option1": "Template",
-        "option2": "Template",
-        "option3": "Template",
-        "option4": "Template"
+        "option1": "-",
+        "option2": "-",
+        "option3": "-",
+        "option4": "-"
     },
     "vote_options": {
         "options": {
-            "opt_1": 0,
-            "opt_2": 100,
-            "opt_3": 100,
-            "opt_4": 0
+            "opt_1": 15,
+            "opt_2": 23,
+            "opt_3": 11,
+            "opt_4": 21
         }
     }
 }

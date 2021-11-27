@@ -20,6 +20,9 @@
       <div class="col-md-6">
         <label for="inputQuestion" class="form-label">Umfragen Name</label>
         <input type="text" class="form-control" name="inputPollName" question="inputQuestion" placeholder="z.B. DjungelUmfrage">
+        {% if error %}
+        <p style="color:red">{{errorMessage}}</p>
+        {% endif %}
       </div>
       <div class="col-md-3">
       </div>

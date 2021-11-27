@@ -1,11 +1,19 @@
 {% extends "base.html" %} {% block title %}MyPolls{% endblock %} {% block content%}
 <script src="https://kit.fontawesome.com/31a22219e1.js" crossorigin="anonymous"></script>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#589c4c52;">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pollContent" aria-controls="content" aria-expanded="false" aria-label="Toggle navigation">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#356b2c;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pollContent" aria-controls="content"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="pollContent" style="width: 100%">
-    <div class="navbar-nav">
+  <div class="collapse navbar-collapse" id="pollContent">
+    <div class="navbar-nav container-fluid" style="z-index: 1;">
       {%for i in range(0, count)%}
       <form action="/{{polls[i]}}">
         <a class="nav-item nav-link" style="color:white" id="home" href="/{{polls[i]}}">{{polls[i]}}</a>
@@ -40,8 +48,12 @@
     src=" https://www.16bars.de/wp-content/uploads/2020/04/Bildschirmfoto-2020-04-14-um-14.06.10-750x400.png" alt="MDN">
 </div>
 <p>Da war nix leute.</p>
-{% endif %}
+{% elif "live" in request.url %}
+<h1 align="center">Umfrage: {{ pollName }} is now <img src="https://i.giphy.com/media/wvP4x67EnIhWiCztAf/giphy.webp" width="225" height="100"
+  frameBorder="0"></img></h1>
+{% else %}
 <h1 align="center">Umfrage: {{ pollName }}</h1>
+{% endif%}
 <form method="POST">
   <div align="center">
     <div id="container" <script src="script.js">
@@ -95,9 +107,13 @@
       vertical-align: top
     }
   </style>
-  <div class="parent" align="center">
-    <img align="left" src="https://i.giphy.com/media/wvP4x67EnIhWiCztAf/giphy.webp" width="225" height="100" frameBorder="0"></img>
-    <table class="tg" style="undefined; table-layout: fixed; width: 574px">
+  {% if request.path == "/DatBoy" %}
+  <div align="center">
+    <p>THIS IS A TEMPLATE</p>
+  </div>
+  {% else %}
+  <div class="parent">
+    <table class="tg" style="undefined; table-layout: fixed; width: 574px " align="left">
       <colgroup>
         <col style="width: 273px">
         <col style="width: 301px">
@@ -123,58 +139,65 @@
         </tr>
         <tr>
           <td class="tg-baqh">{{pollOptions[0]}}</td>
-          <td class="tg-baqh">%</td>
+          <td class="tg-baqh">{{valueContainer[0]}}%</td>
         </tr>
         <tr>
           <td class="tg-i81m">{{pollOptions[1]}}</td>
-          <td class="tg-baqh">%</td>
+          <td class="tg-baqh">{{valueContainer[1]}}%</td>
         </tr>
         <tr>
           <td class="tg-baqh">{{pollOptions[2]}}</td>
-          <td class="tg-baqh">%</td>
+          <td class="tg-baqh">{{valueContainer[2]}}%</td>
         </tr>
         <tr>
           <td class="tg-i81m">{{pollOptions[3]}}</td>
-          <td class="tg-baqh">%</td>
+          <td class="tg-baqh">{{valueContainer[3]}}%</td>
         </tr>
       </tbody>
     </table>
-  </div>
-  </div>
-</form>
-</div>
-{% if request.path == "/DatBoy" %}
-<div align="center">
-  <p>THIS IS A TEMPLATE</p>
-</div>
-{% else %}
-<div class="container" align="center">
-  <div class="row">
-    <form method="POST" action="/{{url}}?WE-LIVE-BOIS">
-      <div class="col">
-        <button type="submit" class="btn btn-outline-warning" style="font-size:24px" name="live"><i
+    <form method="POST" action="/{{url}}?live"></form> <!--idk why but for any god forsaken reason i need 2 tags because Arafat Abu-Chaker seems to get half of my FORM tags-->
+    <form method="POST" action="/{{url}}?live">
+      <div class="col" align="center" style="margin: 10px;">
+        <button type="submit" class="btn btn-outline-warning" style="font-size:24px; width:300px" name="live"><i
             class="fas fa-rocket fa-lg"></i> We Live!</button>
       </div>
     </form>
     <form method="POST" action="/{{url}}?activate">
-      <div class="col">
-        <button type="submit" class="btn btn-outline-success" style="font-size:24px" name="active" value="active">Knall
-          Aktiv den Bums!</button>
+      <div class="col" align="center" style="margin: 10px;">
+        <button type="submit" class="btn btn-outline-success" style="font-size:24px; width:300px" name="active"
+          value="active"><i class="fas fa-check"></i> Knall Aktiv den Bums!</button>
       </div>
     </form>
     <form method="POST" action="/{{url}}?offline">
-      <div class="col">
-        <button type="submit" class="btn btn-outline-secondary" style="font-size:24px" name="deactivate">Mach aus
+      <div class="col" align="center" style="margin: 10px;">
+        <button type="submit" class="btn btn-outline-secondary" style="font-size:24px; width:300px" name="deactivate">
+          <i class="far fa-times-circle"></i> Mach aus
           jetz.</button>
       </div>
     </form>
     <form method="POST" action="/{{url}}?delete">
-      <div class="col">
-        <button type="submit" class="btn btn-outline-danger" style="font-size:24px" name="deactivate"><i class="fas fa-trash-alt"></i> Deletus.</button>
+      <div class="col" align="center" style="margin: 10px;">
+        <button type="submit" class="btn btn-outline-danger" style="font-size:24px; width:300px" name="delete"><i
+            class="fas fa-trash-alt"></i> Deletus.</button>
       </div>
     </form>
   </div>
-</div>
   {% endif %}
-  <div align="center">
-    {% endblock %}
+  <h1>xddd</h1>
+  <h1 id="num"></h1>
+  <h1 id="time"></h1>
+  <script>
+      setInterval(function(){$.ajax({
+          url: '/update',
+          type: 'POST',
+          success: function(response) {
+              console.log(response);
+              $("#num").html(response["value"]);
+              $("#time").html(response["time"]);
+          },
+          error: function(error) {
+              console.log(error);
+          }
+      })}, 1000);
+  </script>
+{% endblock %}
