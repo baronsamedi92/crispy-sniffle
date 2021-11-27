@@ -1,20 +1,20 @@
 {
-    "question": "Wer hat gefurzt?",
-    "question_desc": "bah das stinkt",
+    "question": "Ist Python geil?",
+    "question_desc": "??",
     "question_desc_size": "155%",
-    "poll_active": true,
+    "poll_active": false,
     "caspar_options": {
-        "option1": "Hauke",
-        "option2": "Sven",
-        "option3": "Deniz",
-        "option4": "Matt"
+        "option1": "Ja",
+        "option2": "Nein",
+        "option3": "Meh",
+        "option4": "MEGA GEIL"
     },
     "vote_options": {
         "options": {
-            "opt_1": 15,
-            "opt_2": 23,
-            "opt_3": 11,
-            "opt_4": 21
+            "opt_1": 0,
+            "opt_2": 100,
+            "opt_3": 100,
+            "opt_4": 0
         }
     }
 }

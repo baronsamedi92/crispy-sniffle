@@ -1,6 +1,6 @@
 from operator import indexOf
 import re
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, redirect
 import flask
 from flask_login import login_required, current_user
 from .models import Note
@@ -42,8 +42,6 @@ print(count)
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
-
-
     return render_template("home.html")
 
 @views.route('/poll-deleted', methods=['GET', 'POST'])
@@ -89,12 +87,19 @@ def datBoy():
 
 @views.route('/<str>', methods=['GET', 'POST'])  # /PollXYZ
 def pollPages(str):
-    kebab = flask.request.url
-    blah = "activate"
-    if 'activate' in kebab:
-     flash(kebab)
 
 #sort the directory and set up the poll
+
+    directory_in_str = "website/jsonFiles/"
+    directory = os.fsencode(directory_in_str)
+    fileNameArray = []
+
+    for count, file in enumerate(os.listdir(directory)):
+     filename = os.fsdecode(file)
+     fileNameArray.append(filename)
+     print(count)
+    
+    print(count)
     data = getPoll("website/jsonFiles/"+str)
     sortDirectory()
     isActive = data['poll_active']
@@ -128,14 +133,26 @@ def pollPages(str):
         data['poll_active'] = True
         with open("website/casparJsonFIle/poll.json", "w+") as f:
          json.dump(data, f, indent=4)
+        with open("website/jsonFiles/"+str, "w+") as file:
+         json.dump(data, file, indent=4)
     elif 'offline' in flask.request.url:
         pass 
         data['poll_active'] = False
         with open("website/casparJsonFIle/poll.json", "w+") as f:
          json.dump(data, f, indent=4)
+        with open("website/jsonFiles/"+str, "w+") as file:
+         json.dump(data, file, indent=4)
     elif 'delete' in flask.request.url:
         pass # do something else
         os.remove("website/jsonFiles/"+str)
+        flash(pollName + " is nu im Müll.", category="info")
+        return redirect("/DatBoy?file-deleted", code=302)
+    elif 'LIVE' in flask.request.url:
+        pass # do something else
+        os.remove("website/jsonFiles/"+str)
+        flash(pollName + "WE LIFE BOIS", category="info")
+    
+
     else:
         pass # unknown
     
@@ -143,7 +160,7 @@ def pollPages(str):
     return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, isActive=isActive,
     count=count, polls=fileNameArray, pollName=pollName, url=str)
 
-@views.route('/activate', methods=['GET', 'POST'])
+@views.route('/poll-deleted', methods=['GET', 'POST'])
 def activate():
     return "OH SHIT OH SHIT OH SHIT"
 
