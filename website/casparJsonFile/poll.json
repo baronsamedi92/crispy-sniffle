@@ -1,13 +1,13 @@
 {
-    "question": "Test",
-    "question_desc": "???",
+    "question": "",
+    "question_desc": "",
     "question_desc_size": "155%",
     "poll_active": false,
     "caspar_options": {
-        "option1": "ttttt",
-        "option2": "zzzzzz",
-        "option3": "uuuuuuu",
-        "option4": "iiiiiii"
+        "option1": "",
+        "option2": "",
+        "option3": "",
+        "option4": ""
     },
     "vote_options": {
         "options": {
