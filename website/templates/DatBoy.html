@@ -48,7 +48,7 @@
     src=" https://www.16bars.de/wp-content/uploads/2020/04/Bildschirmfoto-2020-04-14-um-14.06.10-750x400.png" alt="MDN">
 </div>
 <p>Da war nix leute.</p>
-{% elif "live" in request.url %}
+{% elif isPollLive %}
 <h1 align="center">Umfrage: {{ pollName }} is now <img src="https://i.giphy.com/media/wvP4x67EnIhWiCztAf/giphy.webp" width="225" height="100"
   frameBorder="0"></img></h1>
 {% else %}
@@ -112,8 +112,8 @@
     <p>Klick auf ne Umfrage und lass den spaß losgehen.</p>
   </div>
   {% else %}
-  <div class="parent">
-    <table class="tg" style="undefined; table-layout: fixed; width: 574px " align="left">
+  <div class="parent" id=>
+    <table class="tg" style="table-layout: fixed; width: 574px " align="left" id="pollTable">
       <colgroup>
         <col style="width: 273px">
         <col style="width: 301px">
@@ -154,15 +154,26 @@
           <td class="tg-baqh">{{valueContainer[3]}}%</td>
         </tr>
       </tbody>
-    </table>
-    <form method="POST" action="/{{url}}?live"></form> <!--idk why but for any god forsaken reason i need 2 tags because Arafat Abu-Chaker seems to get half of my FORM tags-->
-    <form method="POST" action="/{{url}}?live">
+    </table>  
+    <script>
+   </script>
+   {% if isPollLive %}
+   <form method="POST" action="/{{url}}?regie%20mach%20aus" ></form> <!--idk why but for any god forsaken reason i need 2 tags because Arafat Abu-Chaker seems to get half of my FORM tags-->
+   <form method="POST" action="/{{url}}?regie%20mach%20aus">
+    <div class="col" align="center" style="margin: 10px;">
+      <button type="submit" class="btn btn-outline-dark" style="font-size:24px; width:300px" name="active"
+        value="active"><i class="fas fa-power-off"></i> Umfrage Offline Schalten</button>
+    </div>
+  </form>
+   {% else %}
+    <form method="POST" action="/{{url}}?live" id="live"></form> <!--idk why but for any god forsaken reason i need 2 tags because Arafat Abu-Chaker seems to get half of my FORM tags-->
+    <form method="POST" action="/{{url}}?live" id="live">
       <div class="col" align="center" style="margin: 10px;">
         <button type="submit" class="btn btn-outline-warning" style="font-size:24px; width:300px" name="live"><i
             class="fas fa-rocket fa-lg"></i> We Live!</button>
       </div>
     </form>
-    <form method="POST" action="/{{url}}?activate">
+    <form method="POST" action="/{{url}}?activate" id="activate">
       <div class="col" align="center" style="margin: 10px;">
         <button type="submit" class="btn btn-outline-success" style="font-size:24px; width:300px" name="active"
           value="active"><i class="fas fa-check"></i> Knall Aktiv den Bums!</button>
@@ -183,4 +194,5 @@
     </form>
   </div>
   {% endif %}
+ {% endif %}
 {% endblock %}

@@ -2,7 +2,7 @@
     "question": "",
     "question_desc": "",
     "question_desc_size": "155%",
-    "poll_active": false,
+    "poll_active": true,
     "caspar_options": {
         "option1": "",
         "option2": "",
@@ -11,10 +11,10 @@
     },
     "vote_options": {
         "options": {
-            "opt_1": 0,
-            "opt_2": 100,
-            "opt_3": 100,
-            "opt_4": 0
+            "opt_1": 15,
+            "opt_2": 23,
+            "opt_3": 11,
+            "opt_4": 21
         }
     }
 }

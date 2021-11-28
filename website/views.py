@@ -1,17 +1,13 @@
 from operator import indexOf
 import re
-from flask import Blueprint, render_template, request, flash, redirect, jsonify, render_template_string
+from flask import Blueprint, render_template, request, flash, redirect
 import flask
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
 import json
-from datetime import date
 import tkinter as tk
 import os
-import datetime
-import time
-import threading
 
 
 
@@ -22,6 +18,9 @@ def getPoll(JsonFile):
     with open(JsonFile, "r") as f:
      data = json.loads(f.read())
     return data
+
+def getLiveState(bool):
+     return bool
 
 directory_in_str = "website/jsonFiles/"
 def sortDirectory():
@@ -34,7 +33,6 @@ fileNameArray = []
 for count, file in enumerate(directory):
      filename = os.fsdecode(file)
      fileNameArray.append(filename)
-print(count)
 
 
     
@@ -60,16 +58,8 @@ def datBoy():
     for count, file in enumerate(os.listdir(directory)):
      filename = os.fsdecode(file)
      fileNameArray.append(filename)
-     print(count)
-    
-    print(count)
 
-    allPolls = getPoll("website/jsonFiles/allPolls.json")
-    pollsIteratedAndBrokenUpForStupidPython = []
-    for i in (range( 1, len(allPolls)+1)):
-     pollsIteratedAndBrokenUpForStupidPython.append(allPolls['poll'+str(i)])
-
-    data = getPoll("website/jsonFiles/poll_template.json")
+    data = getPoll("website/poll_template/poll_template.json")
     isActive = data['poll_active']
     question = data['question']
     casparOptions = data['caspar_options']
@@ -83,15 +73,17 @@ def datBoy():
     answerContainer.append(answer2)
     answerContainer.append(answer3)
     answerContainer.append(answer4)
+    live=False
 
     return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, 
-    pollOptions=answerContainer, isActive=isActive, count=count, polls=fileNameArray)
+    pollOptions=answerContainer, isActive=isActive, count=count, polls=fileNameArray, isPollLive=live)
 
 
 @views.route('/<str>', methods=['GET', 'POST'])  # /PollXYZ
 def pollPages(str):
-#sort the directory and set up the poll
+    isPollLive = getLiveState(False)
 
+#sort the directory and set up the poll
     directory_in_str = "website/jsonFiles/"
     directory = os.fsencode(directory_in_str)
     fileNameArray = []
@@ -99,12 +91,12 @@ def pollPages(str):
     for count, file in enumerate(os.listdir(directory)):
      filename = os.fsdecode(file)
      fileNameArray.append(filename)
-     print(count)
+ 
     
     if str not in fileNameArray:
      return render_template("404.html")
     else:
-     print(count)
+    
      data = getPoll("website/jsonFiles/"+str)
    
     sortDirectory()
@@ -134,7 +126,7 @@ def pollPages(str):
     valueContainer.append(voteValue3)
     valueContainer.append(voteValue4)
     pollName = str[:len(str)-5]
-
+    
      #Check Buttons if none was clicked just go on with the data loading
     if 'activate' in flask.request.url:
         flash('DING IS AKTIV')
@@ -158,22 +150,32 @@ def pollPages(str):
     elif 'live' in flask.request.url:
         pass # do something else
         flash("LIVE ON STAGE")
-        #os.system("website\helloWorld.py 1")
+        data['poll_active'] = True
+        with open("website/casparJsonFIle/poll.json", "w+") as f:
+         json.dump(data, f, indent=4)
+        with open("website/jsonFiles/"+str, "w+") as file:
+         json.dump(data, file, indent=4)
+        isPollLive = getLiveState(True)
+        os.system("website\helloWorld.py 1")
+    elif '?regie%20mach%20aus' in flask.request.url:
+        pass # do something else
+        isPollLive = getLiveState(False)
+        #clearScript os.system("website\helloWorld.py 1")
     else:
         pass # unknown
-    
+       
+
+    print(flask.request)
+
 
     return render_template("datBoy.html", pollQuestion=question, pollDescription=casparDesctiption, pollOptions=answerContainer, valueContainer=valueContainer, isActive=isActive,
-    count=count, polls=fileNameArray, pollName=pollName, url=str)
+    count=count, polls=fileNameArray, pollName=pollName, url=str, isPollLive = isPollLive)
 
-@views.route('/poll-deleted', methods=['GET', 'POST'])
+
+@views.route('/offline', methods=['GET', 'POST'])
 def activate():
+    print("schnidel")
     return "OH SHIT OH SHIT OH SHIT"
-
-    
-
-
-
 
 
 @views.route('/DatBoy', methods=['GET', 'POST'])
@@ -210,21 +212,17 @@ def form():
     directory = os.fsencode(directory_in_str)
     fileNameArray = []
     for count, file in enumerate(os.listdir(directory)):
-     print(count)
      filename = os.fsdecode(file)
      fileNameArray.append(filename)
     
-    
-
 
     if NameAlreadyTaken+".json" in fileNameArray:
         error = "Den Namen "+ NameAlreadyTaken + " haste schon mal verwendet, mach ma anderen pls, sonst fliegt mir hier der ganze scheiß um die Ohren."
         return render_template("createPoll.html", errorMessage=error, error=True)
 
     else:
-        print(NameAlreadyTaken + "LOL")
         info = "Die Poll " + NameAlreadyTaken +" wurde erstellt."
-        with open("website/jsonFiles/poll_template.json", "r+") as f:
+        with open("website/poll_template/poll_template.json", "r+") as f:
           newPoll = json.loads(f.read())
         #get input from poll
         inputPollName = request.form.get('inputPollName')
@@ -248,8 +246,5 @@ def form():
 
         with open("website/jsonFiles/"+str(inputPollName)+".json", "w+") as f:
             json.dump(newPoll, f)
-
-
-   
 
     return render_template("form.html", pollName= inputPollName, info=info)
